@@ -1,6 +1,18 @@
 version: "3.8"
 
 services:
+#  web:
+#    build:
+#      context: ./frontend
+#      target: runner
+#    container_name: nextjs
+#    volumes:
+#      - ./frontend:/app
+#    ports:
+#      - "3000:3000"
+#    environment:
+#      NODE_ENV: development
+#    restart: unless-stopped
 
   php:
     build:
@@ -9,8 +21,10 @@ services:
     container_name: php
     restart: unless-stopped
     working_dir: /var/www/
+    user: 1000:1000
     volumes:
       - ./backend:/var/www
+      - ./backend/php.ini:/usr/local/etc/php/php.ini
     networks:
       - bridge
 
@@ -29,6 +43,14 @@ services:
     networks:
       - bridge
 
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - bridge
+
   nginx:
     image: nginx:latest
     container_name: nginx
@@ -37,12 +59,11 @@ services:
       - 8000:80
     volumes:
       - ./backend:/var/www
-      - ./backend/nginx:/etc/nginx/conf.d
+      - ./backend/nginx/conf.d:/etc/nginx/conf.d
     networks:
       - bridge
     depends_on:
       - php
-
 
 networks:
   bridge:

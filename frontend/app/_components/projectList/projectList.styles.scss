@@ -1,0 +1,13 @@
+@import "@scss/variables.scss";
+
+.project_list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  width: 100%;
+  overflow: scroll;
+  background-color: white;
+  border-radius: 8px;
+  justify-content: space-between;
+}

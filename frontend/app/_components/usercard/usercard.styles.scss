@@ -1,0 +1,29 @@
+@import "@scss/variables.scss";
+.user-card {
+  display: flex;
+  padding: 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background: $grey;
+  border-radius: 8px;
+  & > * {
+    margin: 4px;
+  }
+  & > .user-card__profile-picture {
+    $size: 144px;
+    height: $size;
+    width: $size;
+    margin: 8px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  & > .user-card__name {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  & > .user-card__role {
+    font-size: 0.75rem;
+    opacity: 0.5;
+  }
+}

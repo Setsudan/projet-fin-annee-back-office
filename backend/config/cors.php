@@ -15,11 +15,15 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['api/*', 'api/', 'sanctum/csrf-cookie', 'login'],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => [
+        env('SANCTUM_STATEFUL_DOMAINS'),
+        'http://'.env('SANCTUM_STATEFUL_DOMAINS'),
+        'https://'.env('SANCTUM_STATEFUL_DOMAINS'),
+    ],
 
     'allowed_origins_patterns' => [],
 
@@ -29,6 +33,6 @@ return [
 
     'max_age' => 0,
 
-    'supports_credentials' => false,
+    'supports_credentials' => true,
 
 ];
