@@ -26,7 +26,7 @@ Route::get('/', function () {
             'attributes' => [
                 'name' => 'Laravel',
                 'version' => '10.0',
-                'message' => 'Hello World!'
+                'message' => 'Hello from Laravel API'
             ]
         ]
     ], 200);
