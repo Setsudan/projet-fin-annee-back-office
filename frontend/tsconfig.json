@@ -21,7 +21,7 @@
     ],
     "paths": {
       "~/*": ["./*"],
-      "~/content/*": ["./app/content/*"],
+      "~/content/*": ["./app/_content/*"],
       "~/interface/*": ["./app/_interface/*"]
     }
   },
