@@ -1,4 +1,4 @@
-import { ApiStatus } from "~/interface/api.interface";
+import { ApiStatus } from "~/app/_interface/api.interface";
 const getApiStatus = async (): Promise<ApiStatus> => {
   try {
     const data = await fetch("http://localhost:8000/api/");
