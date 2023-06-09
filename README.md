@@ -2,10 +2,7 @@
 Projet fin d'année NextJS 13 | TypeScript | Laravel | PostGreSQL
 
 ## Prérequis
-- Composer
-- Docker
-- Docker-compose
-- PHP 8.1
+    - Disposer des variables d'environnement dans un fichier `.env`
 
 ## SETUP
 ```git clone https://github.com/Rijenth/projet-fin-annee-back-office.git```
