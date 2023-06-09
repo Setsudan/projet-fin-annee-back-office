@@ -7,6 +7,10 @@ Projet fin d'année NextJS 13 | TypeScript | Laravel | PostGreSQL
 ## SETUP
 ```git clone https://github.com/Rijenth/projet-fin-annee-back-office.git```
 
+````cd projet-fin-annee-back-office/frontend```
+
+```npm install```
+
 ```docker-compose up -d```
 
 ```docker-compose exec php composer install```
