@@ -22,6 +22,7 @@ services:
     container_name: php
     restart: unless-stopped
     working_dir: /var/www/
+    user: 1000:1000
     volumes:
       - ./backend:/var/www
     networks:
@@ -39,6 +40,14 @@ services:
       - 5432:5432
     volumes:
       - ./postgres:/var/lib/postgresql/data
+    networks:
+      - bridge
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
     networks:
       - bridge
 

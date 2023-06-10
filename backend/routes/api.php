@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\UserController;
+use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,20 +18,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::apiResource('/users', UserController::class)->only(['store']);
 
-Route::get('/', function () {
-    return response()->json([
-        'data' => [
-            'id' => '1',
-            'type' => 'Api Resource',
-            'attributes' => [
-                'name' => 'Laravel',
-                'version' => '10.0',
-                'message' => 'Hello from Laravel API'
-            ]
-        ]
-    ], 200);
+Route::middleware('auth:sanctum')->group(function () {
+    // AUTHENTIFICATION
+    Route::post('/logout', [AuthenticationController::class, 'logout'])->name('authentication.logout');
+
+    Route::get('/user', function (Request $request) {
+        $user = User::find($request->user()->id);
+
+        return response()->json([
+            'data' => new UserResource($user),
+        ]);
+    })->name('authentication.user');
+
+    // API RESOURCE
+    Route::get('/', function () {
+        return response()->json([
+            'data' => [
+                'id' => '1',
+                'type' => 'Api Resource',
+                'attributes' => [
+                    'name' => 'Laravel',
+                    'version' => '10.0',
+                    'message' => 'Hello from Laravel API',
+                ],
+            ],
+        ], 200);
+    });
 });
