@@ -27,9 +27,11 @@ class AuthenticationController extends Controller
         }
 
         return response()->json([
-            'status' => 401,
-            'detail' => 'Unauthorized',
-            'message' => 'The provided credentials do not match our records.',
+            'errors' => [
+                'status' => 401,
+                'title' => 'Unauthorized',
+                'detail' => 'Invalid credentials.',
+            ],
         ], 401);
     }
 

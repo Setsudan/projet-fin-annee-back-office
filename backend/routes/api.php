@@ -21,7 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('/users', UserController::class)->only(['store']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    // AUTHENTIFICATION
+    /*
+        AUTHENTIFICATION
+    */
     Route::post('/logout', [AuthenticationController::class, 'logout'])->name('authentication.logout');
 
     Route::get('/user', function (Request $request) {
@@ -32,11 +34,13 @@ Route::middleware('auth:sanctum')->group(function () {
         ]);
     })->name('authentication.user');
 
-    // API RESOURCE
+    /*
+        API RESOURCE
+    */
     Route::get('/', function () {
         return response()->json([
             'data' => [
-                'id' => '1',
+                'id' => 1,
                 'type' => 'Api Resource',
                 'attributes' => [
                     'name' => 'Laravel',
