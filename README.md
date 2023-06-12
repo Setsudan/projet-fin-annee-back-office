@@ -1,20 +1,38 @@
-# projet-fin-annee-back-office
-Projet fin d'année NextJS 13 | TypeScript | Laravel | PostGreSQL
+# 🌟 Projet Fin d'Année Back-Office 🌟
 
-## Prérequis
-    - Disposer des variables d'environnement dans un fichier `.env`
+Projet de fin d'année NextJS 13 | TypeScript | Laravel | PostGreSQL
 
-## SETUP
-```git clone https://github.com/Rijenth/projet-fin-annee-back-office.git```
+## 📋 Prérequis
+- Disposer des variables d'environnement dans un fichier `.env`
 
-```cd projet-fin-annee-back-office/frontend```
+## ⚙️ SETUP
 
-```npm install```
+Rentrez les commandes suivantes une à une ou utiliser le fichiers init.bat pour windows ou init.sh pour linux/macOs
 
-```docker-compose up -d```
+```
+git clone https://github.com/Rijenth/projet-fin-annee-back-office.git
+```
 
-```docker-compose exec php composer install```
+```
+cd projet-fin-annee-back-office/frontend
+```
 
-```docker-compose exec php php artisan key:generate```
+```
+npm install
+```
 
-```docker-compose exec php php artisan optimize:clear```
+```
+docker-compose up -d
+```
+
+```
+docker-compose exec php composer install
+```
+
+```
+docker-compose exec php php artisan key:generate
+```
+
+```
+docker-compose exec php php artisan optimize:clear
+```

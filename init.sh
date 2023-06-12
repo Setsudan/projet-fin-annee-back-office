@@ -1,0 +1,22 @@
+#!/bin/bash
+
+echo "Cloning the repository..."
+git clone https://github.com/Rijenth/projet-fin-annee-back-office.git
+
+echo "Changing directory to frontend..."
+cd projet-fin-annee-back-office/frontend
+
+echo "Installing dependencies..."
+npm install
+
+echo "Starting Docker containers..."
+docker-compose up -d
+
+echo "Running composer install..."
+docker-compose exec php composer install
+
+echo "Generating application key..."
+docker-compose exec php php artisan key:generate
+
+echo "Clearing optimization cache..."
+docker-compose exec php php artisan optimize:clear
