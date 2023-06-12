@@ -61,6 +61,8 @@ Sur votre navigateur, ```localhost:8000/api/``` doit retourner :
 
 ## Commandes
 
+Donne des informations sur ce qui ne respecte pas les bonnes pratiques de code
 ```docker-compose exec php composer test```
 
+Fix les erreurs de style automatiquement
 ```docker-compose exec php composer lint```

@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -44,5 +46,35 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    /**
+     * Render an exception into an HTTP response.
+     */
+    public function render($request, Throwable $e)
+    {
+        $statusCode = $e->getCode() ?: 500;
+
+        if ($e instanceof AuthenticationException) {
+            return response()->json([
+                'errors' => [
+                    'status' => 401,
+                    'title' => Response::$statusTexts[401],
+                    'message' => $e->getMessage(),
+                ],
+            ], 401);
+        }
+
+        return response()->json([
+            'errors' => [
+                'status' => $statusCode,
+                'title' => Response::$statusTexts[$statusCode],
+                'message' => $e->getMessage(),
+                'details' => [
+                    'file' => $e->getFile(),
+                    'line' => $e->getLine(),
+                ],
+            ],
+        ], $statusCode);
     }
 }
