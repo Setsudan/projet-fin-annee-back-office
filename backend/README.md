@@ -40,6 +40,8 @@ Environnement de développement pour le projet de fin d'année
 
 ```docker-compose exec php php artisan optimize:clear```
 
+```docker-compose exec php php artisan migrate:fresh```
+
 ## Verifier que tout fonctionne
 Sur votre navigateur, ```localhost:8000/api/``` doit retourner :
 
@@ -66,3 +68,9 @@ Donne des informations sur ce qui ne respecte pas les bonnes pratiques de code
 
 Fix les erreurs de style automatiquement
 ```docker-compose exec php composer lint```
+
+Reinitialiser la base donnée
+```docker-compose exec php php artisan migrate:fresh```
+
+## Accès au Telescope : 
+```localhost:8000/telescope```
