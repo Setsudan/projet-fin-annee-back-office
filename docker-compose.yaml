@@ -8,10 +8,12 @@ services:
    container_name: nextjs
    volumes:
      - ./frontend:/app
+     - /app/node_modules
    ports:
      - "3000:3000"
    environment:
-     NODE_ENV: development
+      - NODE_ENV=development
+      - "NEXT_WEBPACK_USEPOLLING=1"
    restart: unless-stopped
 
   php:
