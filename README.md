@@ -18,7 +18,7 @@ cd projet-fin-annee-back-office/frontend
 ```
 
 ```
-npm install
+yarn install
 ```
 
 ```
