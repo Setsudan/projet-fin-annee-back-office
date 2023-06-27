@@ -17,10 +17,10 @@ class ProfessorFactory extends Factory
     public function definition(): array
     {
         $email = fake()->unique()->safeEmail();
+
         return [
             'name' => fake()->name(),
             'email' => $email,
         ];
     }
-
 }

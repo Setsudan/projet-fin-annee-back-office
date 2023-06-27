@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 
-class ProfessorResource extends JsonApiResource
+class OrchestreResource extends JsonApiResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +16,11 @@ class ProfessorResource extends JsonApiResource
         return $this->attributesToArray([
             'attributes' => [
                 'name' => $this->name,
+                'email' => $this->email,
+                'nombreDeMembre' => $this->nombreDeMembre,
+                'hasBeenInvited' => $this->hasBeenInvited,
             ],
-            'relationships' => [
-                'classrooms',
-            ],
+            'relationships' => [],
         ]);
     }
 }

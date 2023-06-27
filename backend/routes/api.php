@@ -51,3 +51,5 @@ Route::middleware('auth:sanctum')->group(function () {
         ], 200);
     });
 });
+
+Route::post('/orchestres/{orchestre}/invite', [OrchestreController::class, 'inviteByEmail']);

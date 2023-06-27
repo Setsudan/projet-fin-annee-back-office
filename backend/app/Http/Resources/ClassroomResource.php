@@ -20,7 +20,7 @@ class ClassroomResource extends JsonResource
             ],
             'relationships' => [
                 'students',
-                'professors'
+                'professors',
             ],
         ]);
     }

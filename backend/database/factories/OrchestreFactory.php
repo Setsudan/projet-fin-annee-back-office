@@ -2,13 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Student>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
-class StudentFactory extends Factory
+class OrchestreFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,8 +19,10 @@ class StudentFactory extends Factory
         $email = fake()->unique()->safeEmail();
 
         return [
-            'name' => fake()->name(),
+            'name' => fake()->company(),
             'email' => $email,
+            'nombreDeMembre' => fake()->randomDigit(),
+            'hasBeenInvited' => fake()->boolean(),
         ];
     }
 }

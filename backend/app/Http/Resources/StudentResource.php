@@ -3,7 +3,6 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 class StudentResource extends JsonApiResource
 {
@@ -19,7 +18,7 @@ class StudentResource extends JsonApiResource
                 'name' => $this->name,
             ],
             'relationships' => [
-                'classrooms'
+                'classrooms',
             ],
         ]);
     }
