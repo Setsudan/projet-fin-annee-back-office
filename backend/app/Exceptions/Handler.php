@@ -3,8 +3,10 @@
 namespace App\Exceptions;
 
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Response;
+use Illuminate\Session\TokenMismatchException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -53,8 +55,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $e)
     {
-        $statusCode = $e->getCode() ?: 500;
-
         if ($e instanceof AuthenticationException) {
             return response()->json([
                 'errors' => [
@@ -65,14 +65,36 @@ class Handler extends ExceptionHandler
             ], 401);
         }
 
+        if ($e instanceof ModelNotFoundException) {
+            return response()->json([
+                'errors' => [
+                    'status' => 404,
+                    'title' => Response::$statusTexts[404],
+                    'message' => $e->getMessage(),
+                ],
+            ], 404);
+        }
+
+        if ($e instanceof TokenMismatchException) {
+            return response()->json([
+                'errors' => [
+                    'status' => 419,
+                    'title' => $e->getMessage(),
+                    'message' => 'The token has expired or is invalid. Please log in again.',
+                ],
+            ], 419);
+        }
+
+        $statusCode = $e->getCode() ?: $e->status ?? 500;
+
         return response()->json([
             'errors' => [
                 'status' => $statusCode,
-                'title' => Response::$statusTexts[$statusCode],
-                'message' => $e->getMessage(),
+                'title' => Response::$statusTexts[$statusCode] ?? 'Unknown error',
+                'message' => $e->getMessage() ?? 'An unhandled exception has occurred.',
                 'details' => [
-                    'file' => $e->getFile(),
-                    'line' => $e->getLine(),
+                    'file' => $e->getFile() ?? null,
+                    'line' => $e->getLine() ?? null,
                 ],
             ],
         ], $statusCode);

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\UploadFileController;
 use App\Http\Controllers\UserController;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -21,9 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('/users', UserController::class)->only(['store']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    /*
-        AUTHENTIFICATION
-    */
+    /**
+     * Authentication
+     */
     Route::post('/logout', [AuthenticationController::class, 'logout'])->name('authentication.logout');
 
     Route::get('/user', function (Request $request) {
@@ -34,9 +35,15 @@ Route::middleware('auth:sanctum')->group(function () {
         ]);
     })->name('authentication.user');
 
-    /*
-        API RESOURCE
-    */
+    /**
+     * File
+     */
+    Route::apiResource('/files', UploadFileController::class)
+        ->only(['destroy', 'update', 'show', 'store']);
+
+    /**
+     * API Resource
+     */
     Route::get('/', function () {
         return response()->json([
             'data' => [

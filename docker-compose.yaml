@@ -26,6 +26,7 @@ services:
     user: 1000:1000
     volumes:
       - ./backend:/var/www
+      - ./backend/php.ini:/usr/local/etc/php/php.ini
     networks:
       - bridge
 
@@ -60,7 +61,7 @@ services:
       - 8000:80
     volumes:
       - ./backend:/var/www
-      - ./backend/nginx:/etc/nginx/conf.d
+      - ./backend/nginx/conf.d:/etc/nginx/conf.d
     networks:
       - bridge
     depends_on:
