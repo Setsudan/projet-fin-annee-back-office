@@ -65,7 +65,7 @@ class Handler extends ExceptionHandler
                 ],
             ], 500);
         }
-        
+
         if ($e instanceof AuthenticationException) {
             return response()->json([
                 'errors' => [

@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 
-class UserResource extends JsonApiResource
+class RoleResource extends JsonApiResource
 {
     /**
      * Transform the resource into an array.
@@ -16,8 +16,6 @@ class UserResource extends JsonApiResource
         return $this->attributesToArray([
             'attributes' => [
                 'name' => $this->name,
-                'email' => $this->email,
-                'role' => $this->roles()->first()->name,
             ],
             'relationships' => [],
         ]);

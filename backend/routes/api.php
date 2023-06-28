@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UploadFileController;
 use App\Http\Controllers\UserController;
 use App\Http\Resources\UserResource;
@@ -25,6 +26,15 @@ Route::middleware('auth:sanctum')->group(function () {
     /**
      * Authentication
      */
+
+    /*
+        ROLES
+    */
+    Route::apiResource('/roles', RoleController::class)->only(['index']);
+
+    /*
+        AUTHENTIFICATION
+    */
     Route::post('/logout', [AuthenticationController::class, 'logout'])->name('authentication.logout');
 
     Route::get('/user', function (Request $request) {
