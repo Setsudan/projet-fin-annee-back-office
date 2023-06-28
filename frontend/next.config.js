@@ -1,16 +1,6 @@
 /** @type {import('next').NextConfig} */
 
 
-const nextConfig = {
-    webpack: function (config, context) {
-        if(process.env.NEXT_WEBPACK_USEPOLLING) {
-            config.watchOptions = {
-              poll: 500,
-              aggregateTimeout: 300
-            }
-          }
-          return config
-    },
-};
+const nextConfig = {};
 
 module.exports = nextConfig;
