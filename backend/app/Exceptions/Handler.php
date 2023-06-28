@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Response;
 use Illuminate\Session\TokenMismatchException;
@@ -55,6 +56,16 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $e)
     {
+        if ($e instanceof QueryException) {
+            return response()->json([
+                'errors' => [
+                    'status' => 500,
+                    'title' => Response::$statusTexts[500],
+                    'message' => $e->getMessage(),
+                ],
+            ], 500);
+        }
+        
         if ($e instanceof AuthenticationException) {
             return response()->json([
                 'errors' => [
