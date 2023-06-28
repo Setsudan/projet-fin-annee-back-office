@@ -35,6 +35,15 @@ Route::middleware('auth:sanctum')->group(function () {
     /*
         AUTHENTIFICATION
     */
+    /*
+        USER
+    */
+    Route::apiResource('/users', UserController::class)
+        ->only(['show', 'index', 'update', 'destroy']);
+
+    /*
+        AUTHENTIFICATION
+    */
     Route::post('/logout', [AuthenticationController::class, 'logout'])->name('authentication.logout');
 
     Route::get('/user', function (Request $request) {
