@@ -13,7 +13,9 @@ services:
      - "3000:3000"
    environment:
       - NODE_ENV=development
-      - "NEXT_WEBPACK_USEPOLLING=1"
+
+      # Set to true if developing on Windows
+      - NEXT_WEBPACK_USEPOLLING=false
    restart: unless-stopped
 
   php:
