@@ -1,8 +1,5 @@
 @echo off
 
-echo Cloning the repository...
-git clone https://github.com/Rijenth/projet-fin-annee-back-office.git
-
 echo Changing directory to frontend...
 cd projet-fin-annee-back-office/frontend
 

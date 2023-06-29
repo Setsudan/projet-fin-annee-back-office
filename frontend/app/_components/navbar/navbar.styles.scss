@@ -1,0 +1,17 @@
+@import "@scss/variables.scss";
+nav {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  .nav-content {
+    display: flex;
+    flex-direction: column;
+    & > * {
+      margin-bottom: 1rem;
+    }
+  }
+  .bottom-btn {
+    margin-top: auto;
+  }
+}

@@ -1,0 +1,25 @@
+@import "@scss/variables.scss";
+#dashboard-layout {
+  padding: 2rem;
+  height: 100vh;
+  width: 100%;
+  overflow: none;
+  background: $secondary;
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  #nav {
+    width: 200px;
+    height: 100%;
+    grid-column: 1 / 2;
+    grid-row: 1 / 9;
+  }
+  #content {
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 2rem;
+    grid-column: 3 / 17;
+    grid-row: 1 / 9;
+    overflow: scroll;
+  }
+}

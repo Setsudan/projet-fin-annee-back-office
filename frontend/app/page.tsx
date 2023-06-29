@@ -1,4 +1,4 @@
-import content from "~/content/landing.json";
+import content from "@content/landing.json";
 export default function Home() {
   return (
     <main>
