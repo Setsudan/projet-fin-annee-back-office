@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\ProfessorController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\OrchestreController;
 use App\Http\Controllers\UploadFileController;
@@ -55,6 +57,11 @@ Route::middleware('auth:sanctum')->group(function () {
         ]);
     })->name('authentication.user');
 
+    Route::apiResource('/professor', ProfessorController::class)
+    ->only(['index', 'show']);
+
+    Route::apiResource('/student', StudentController::class)
+    ->only(['index', 'show']);
     /**
      * File
      */
