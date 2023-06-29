@@ -6,6 +6,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\OrchestreController;
 use App\Http\Controllers\UploadFileController;
+use App\Http\Controllers\ProductionItemController;
 use App\Http\Controllers\UserController;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -89,4 +90,8 @@ Route::middleware('auth:sanctum')->group(function () {
             ],
         ], 200);
     });
+    /*
+        PRODUCTION ITEMS
+    */
+    Route::resource('production-items', ProductionItemController::class);
 });

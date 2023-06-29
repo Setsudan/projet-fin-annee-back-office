@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             OrchestreSeeder::class,
+            ProductionItemSeeder::class,
         ]);
         Professor::factory()->has(Student::factory()->count(20))->create();
 
