@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\StoreOrchestreRequest;
 use App\Http\Resources\OrchestreResource;
 use App\Mail\OrchestraInvitation;
 use App\Models\Orchestre;
@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Mail;
 
 class OrchestreController extends Controller
 {
-    public function store(StoreUserRequest $request)
+    public function store(StoreOrchestreRequest $request)
     {
         $validated = $request->validated();
-
+        //dd($validated['data']['attributes']);
         $orchestre = Orchestre::create([
             'email' => $validated['data']['attributes']['email'],
             'name' => $validated['data']['attributes']['name'],
@@ -36,7 +36,7 @@ class OrchestreController extends Controller
         return new OrchestreResource($orchestre);
     }
 
-    public function update(StoreUserRequest $request, Orchestre $orchestre)
+    public function update(StoreOrchestreRequest $request, Orchestre $orchestre)
     {
         $validated = $request->validated();
 

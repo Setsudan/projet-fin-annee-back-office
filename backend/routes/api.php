@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\OrchestreController;
 use App\Http\Controllers\UploadFileController;
 use App\Http\Controllers\UserController;
 use App\Http\Resources\UserResource;
@@ -60,6 +61,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/files', UploadFileController::class)
         ->only(['destroy', 'update', 'show', 'store']);
 
+    Route::apiResource('/orchestres', OrchestreController::class)
+    ->only(['store']);
+
+    //Route::post('/orchestres/{orchestre}/invite', [OrchestreController::class, 'inviteByEmail']);
+
     /**
      * API Resource
      */
@@ -77,5 +83,3 @@ Route::middleware('auth:sanctum')->group(function () {
         ], 200);
     });
 });
-
-Route::post('/orchestres/{orchestre}/invite', [OrchestreController::class, 'inviteByEmail']);

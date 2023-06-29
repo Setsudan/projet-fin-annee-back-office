@@ -19,7 +19,7 @@ class Orchestre extends Model
     protected $fillable = [
         'name',
         'email',
-        'nombreDeMembre	',
+        'nombreDeMembre',
         'hasBeenInvited',
     ];
 }
