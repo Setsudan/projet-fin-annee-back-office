@@ -15,19 +15,25 @@ class UserController extends Controller
     {
         $validated = $request->validated();
 
-        $user = new User();
+        $userArray = [];
 
-        $user->fill($validated['data']['attributes']);
+        foreach ($validated['data']['users'] as $attributes) {
+            $user = new User();
 
-        $user->password = Hash::make($validated['data']['attributes']['password']);
+            $attributes['password'] = Hash::make($attributes['password']);
 
-        $user->save();
+            $user->fill($attributes);
 
-        $roles = Role::firstWhere('name', $validated['data']['attributes']['role']);
+            $user->save();
 
-        $user->roles()->attach($roles);
+            $roles = Role::firstWhere('name', $attributes['role']);
 
-        return new UserResource($user);
+            $user->roles()->attach($roles);
+
+            $userArray[] = $user;
+        }
+
+        return UserResource::collection($userArray);
     }
 
     public function show(User $user)

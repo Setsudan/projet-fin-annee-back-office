@@ -19,10 +19,10 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'data.attributes.email' => 'required|unique:users,email|email',
-            'data.attributes.password' => 'required|string|min:5',
-            'data.attributes.name' => 'required|string',
-            'data.attributes.role' => 'required|string|in:monteur,traducteur,redacteur,controle_qualite',
+            'data.users.*.email' => 'required|unique:users,email|email',
+            'data.users.*.password' => 'required|string|min:5',
+            'data.users.*.name' => 'required|string',
+            'data.users.*.role' => 'required|string|in:monteur,traducteur,redacteur,controle_qualite',
         ];
     }
 }
