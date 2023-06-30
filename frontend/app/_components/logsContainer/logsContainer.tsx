@@ -1,3 +1,4 @@
+import React from "react";
 import UserChip from "@components/userChip/userChip.component";
 import { HiXMark } from "react-icons/hi2";
 import "./logsContainer.styles.scss";
@@ -7,11 +8,11 @@ interface LogData {
   date: string;
 }
 
-interface ScrollInfoProps {
+interface LogsContainerProps {
   dataContent: LogData[];
 }
 
-export default function LogsContainer({ dataContent }: ScrollInfoProps) {
+const LogsContainer: React.FC<LogsContainerProps> = ({ dataContent }) => {
   return (
     <div className="containerLogs">
       <div className="contentLogsContainer">
@@ -22,7 +23,7 @@ export default function LogsContainer({ dataContent }: ScrollInfoProps) {
 
         <div className="allLogs">
           {dataContent.map((content, index) => (
-            <div>
+            <div key={index}>
               <UserChip
                 userInfo={{
                   name: "Gwen Stacy",
@@ -45,4 +46,6 @@ export default function LogsContainer({ dataContent }: ScrollInfoProps) {
       </div>
     </div>
   );
-}
+};
+
+export default LogsContainer;
