@@ -1,18 +1,18 @@
 version: "3.8"
 
 services:
-  web:
-    build:
-      context: ./frontend
-      target: runner
-    container_name: nextjs
-    volumes:
-      - ./frontend:/app
-    ports:
-      - "3000:3000"
-    environment:
-      NODE_ENV: development
-    restart: unless-stopped
+#  web:
+#    build:
+#      context: ./frontend
+#      target: runner
+#    container_name: nextjs
+#    volumes:
+#      - ./frontend:/app
+#    ports:
+#      - "3000:3000"
+#    environment:
+#      NODE_ENV: development
+#    restart: unless-stopped
 
   php:
     build:
