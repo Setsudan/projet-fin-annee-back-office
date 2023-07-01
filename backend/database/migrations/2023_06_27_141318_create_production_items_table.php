@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('production_items', function (Blueprint $table) {
             $table->id();
             $table->string('description');
+            $table->integer('quantity');
+            $table->string('state');
             $table->string('type');
-            $table->string('etat');
             $table->timestamps();
         });
     }

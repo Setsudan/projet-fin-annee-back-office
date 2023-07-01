@@ -1,12 +1,12 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
-use App\Http\Controllers\ProfessorController;
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\RoleController;
 use App\Http\Controllers\OrchestreController;
-use App\Http\Controllers\UploadFileController;
 use App\Http\Controllers\ProductionItemController;
+use App\Http\Controllers\ProfessorController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\UploadFileController;
 use App\Http\Controllers\UserController;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -27,18 +27,11 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('/users', UserController::class)->only(['store']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    /**
-     * Authentication
-     */
-
     /*
         ROLES
     */
     Route::apiResource('/roles', RoleController::class)->only(['index']);
 
-    /*
-        AUTHENTIFICATION
-    */
     /*
         USER
     */
@@ -59,10 +52,11 @@ Route::middleware('auth:sanctum')->group(function () {
     })->name('authentication.user');
 
     Route::apiResource('/professor', ProfessorController::class)
-    ->only(['index', 'show']);
+        ->only(['index', 'show']);
 
     Route::apiResource('/student', StudentController::class)
-    ->only(['index', 'show']);
+        ->only(['index', 'show']);
+
     /**
      * File
      */
@@ -70,7 +64,7 @@ Route::middleware('auth:sanctum')->group(function () {
         ->only(['destroy', 'update', 'show', 'store']);
 
     Route::apiResource('/orchestres', OrchestreController::class)
-    ->only(['store']);
+        ->only(['store']);
 
     //Route::post('/orchestres/{orchestre}/invite', [OrchestreController::class, 'inviteByEmail']);
 
@@ -90,8 +84,10 @@ Route::middleware('auth:sanctum')->group(function () {
             ],
         ], 200);
     });
+
     /*
         PRODUCTION ITEMS
     */
-    Route::resource('production-items', ProductionItemController::class);
+    Route::apiResource('/production-items', ProductionItemController::class)
+        ->only(['index', 'show', 'store', 'update', 'destroy']);
 });

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductionItemRequest;
+use App\Http\Requests\UpdateProductionItemRequest;
+use App\Http\Resources\ProductionItemResource;
 use App\Models\ProductionItem;
-use Illuminate\Http\Request;
 
 class ProductionItemController extends Controller
 {
@@ -15,7 +17,8 @@ class ProductionItemController extends Controller
     public function index()
     {
         $productionItems = ProductionItem::all();
-        return response()->json($productionItems);
+
+        return ProductionItemResource::collection($productionItems);
     }
 
     /**
@@ -24,17 +27,17 @@ class ProductionItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProductionItemRequest $request)
     {
-        $data = $request->validate([
-            'description' => 'required|string',
-            'type' => 'required|in:piano,guitar,violin,flute,drums,saxophone,clarinet,trumpet,cello,bass,percussion,choir,accordion,harp,trombone,organ,horn,vibraphone,banjo,mandolin,camera,boom microphone,lighting equipment,film slate,clapperboard,dolly,jib crane,green screen',
-            'quantity' => 'required|integer',
-            'etat' => 'required|string',
-        ]);
+        $validated = $request->validated();
 
-        $productionItem = ProductionItem::create($data);
-        return response()->json($productionItem, 201);
+        $productionItem = new ProductionItem();
+
+        $productionItem->fill($validated['data']['attributes']);
+
+        $productionItem->save();
+
+        return new ProductionItemResource($productionItem);
     }
 
     /**
@@ -45,7 +48,7 @@ class ProductionItemController extends Controller
      */
     public function show(ProductionItem $productionItem)
     {
-        return response()->json($productionItem);
+        return new ProductionItemResource($productionItem);
     }
 
     /**
@@ -55,17 +58,17 @@ class ProductionItemController extends Controller
      * @param  \App\ProductionItems  $productionItem
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductionItem $productionItem)
+    public function update(UpdateProductionItemRequest $request, ProductionItem $productionItem)
     {
-        $data = $request->validate([
-            'description' => 'required|string',
-            'type' => 'required|in:piano,guitar,violin,flute,drums,saxophone,clarinet,trumpet,cello,bass,percussion,choir,accordion,harp,trombone,organ,horn,vibraphone,banjo,mandolin,camera,boom microphone,lighting equipment,film slate,clapperboard,dolly,jib crane,green screen',
-            'quantity' => 'required|integer',
-            'etat' => 'required|string',
-        ]);
+        $validated = $request->validated();
 
-        $productionItem->update($data);
-        return response()->json($productionItem);
+        if (isset($validated['data']['attributes'])) {
+            $productionItem->fill($validated['data']['attributes']);
+
+            $productionItem->save();
+        }
+
+        return new ProductionItemResource($productionItem);
     }
 
     /**
@@ -77,7 +80,7 @@ class ProductionItemController extends Controller
     public function destroy(ProductionItem $productionItem)
     {
         $productionItem->delete();
-        return response()->json(null, 204);
+
+        return response()->noContent();
     }
 }
-

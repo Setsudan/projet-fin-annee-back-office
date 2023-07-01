@@ -12,6 +12,6 @@ class ProductionItemSeeder extends Seeder
      */
     public function run(): void
     {
-        ProductionItem::factory()->count(40)->create();
+        ProductionItem::factory()->count(10)->create();
     }
 }

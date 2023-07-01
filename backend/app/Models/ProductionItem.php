@@ -13,12 +13,13 @@ class ProductionItem extends Model
 
     /**
      * The atrribute that are mass assignable
-     * 
+     *
      * @var array<int, string>
      */
     protected $fillable = [
         'description ',
+        'quantity',
+        'state',
         'type',
-        'état'
     ];
 }
