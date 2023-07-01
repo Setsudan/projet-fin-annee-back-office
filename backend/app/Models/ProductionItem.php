@@ -17,7 +17,7 @@ class ProductionItem extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'description ',
+        'description',
         'quantity',
         'state',
         'type',
