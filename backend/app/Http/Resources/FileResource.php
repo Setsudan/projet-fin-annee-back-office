@@ -20,6 +20,7 @@ class FileResource extends JsonApiResource
                 'original_name' => $this->original_name,
                 'size' => $this->size,
                 'type' => $this->type,
+                'url' => $this->url,
             ],
             'relationships' => [],
         ]);

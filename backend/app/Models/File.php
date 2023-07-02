@@ -15,5 +15,6 @@ class File extends Model
         'original_name',
         'size',
         'type',
+        'url',
     ];
 }

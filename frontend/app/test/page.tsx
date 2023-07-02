@@ -1,19 +1,17 @@
 import { ApiStatus } from "@app/_interface/api.interface";
 const getApiStatus = async (): Promise<ApiStatus> => {
   try {
-    const data = await fetch("http://localhost:8000/api/");
+    const data = await fetch("http://localhost:8000/api-status");
     const apiStatus = await data.json();
     return apiStatus;
   } catch (error) {
     console.error("Error fetching API status:", error);
     return {
       data: {
-        id: "",
-        type: "",
-        attributes: {
-          name: "",
-          version: "",
-          message: "",
+        framework: "",
+        version: "",
+        services: {
+          database: "",
         },
       },
     };
@@ -24,7 +22,7 @@ export default async function ApiStatus() {
   const status = await getApiStatus();
   console.log(status);
 
-  if (!status?.data?.id) {
+  if (!status?.data?.framework) {
     return <div>Loading...</div>;
   }
 
@@ -33,12 +31,10 @@ export default async function ApiStatus() {
       <h1>Status</h1>
 
       <div className="data">
-        <p>id: {status?.data?.id}</p>
-        <p>type: {status?.data?.type}</p>
+        <p>framework: {status?.data?.framework}</p>
+        <p>version: {status?.data?.version}</p>
         <div className="attributes">
-          <p>Name: {status?.data?.attributes?.name}</p>
-          <p>Message: {status?.data?.attributes?.message}</p>
-          <p>Version: {status?.data?.attributes?.version}</p>
+          <p>database: {status?.data?.services?.database}</p>
         </div>
       </div>
     </div>

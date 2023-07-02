@@ -17,9 +17,11 @@ class UserResource extends JsonApiResource
             'attributes' => [
                 'name' => $this->name,
                 'email' => $this->email,
-                'role' => $this->roles()->first()->name,
+                'role' => $this->roles()->first()->name ?? null,
             ],
-            'relationships' => [],
+            'relationships' => [
+                'avatar',
+            ],
         ]);
     }
 }

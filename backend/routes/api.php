@@ -8,6 +8,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UploadFileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserRelationshipController;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -24,19 +25,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::apiResource('/users', UserController::class)->only(['store']);
+Route::apiResource('/users', UserController::class)
+    ->only(['store']);
 
 Route::middleware('auth:sanctum')->group(function () {
     /*
         ROLES
     */
-    Route::apiResource('/roles', RoleController::class)->only(['index']);
+    Route::apiResource('/roles', RoleController::class)
+        ->only(['index']);
 
     /*
         USER
     */
     Route::apiResource('/users', UserController::class)
         ->only(['show', 'index', 'update', 'destroy']);
+
+    Route::apiResource('users.relationships', UserRelationshipController::class)
+        ->only(['update']);
 
     /*
         AUTHENTIFICATION
@@ -67,23 +73,6 @@ Route::middleware('auth:sanctum')->group(function () {
         ->only(['store']);
 
     //Route::post('/orchestres/{orchestre}/invite', [OrchestreController::class, 'inviteByEmail']);
-
-    /**
-     * API Resource
-     */
-    Route::get('/', function () {
-        return response()->json([
-            'data' => [
-                'id' => 1,
-                'type' => 'Api Resource',
-                'attributes' => [
-                    'name' => 'Laravel',
-                    'version' => '10.0',
-                    'message' => 'Hello from Laravel API',
-                ],
-            ],
-        ], 200);
-    });
 
     /*
         PRODUCTION ITEMS

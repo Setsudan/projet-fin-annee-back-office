@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiStatusController;
 use App\Http\Controllers\AuthenticationController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/api-status', [ApiStatusController::class, 'show'])->name('api-status');
 
 Route::post('/register', [AuthenticationController::class, 'register'])->name('register');
 

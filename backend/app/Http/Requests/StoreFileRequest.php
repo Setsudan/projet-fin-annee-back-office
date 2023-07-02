@@ -13,8 +13,15 @@ class StoreFileRequest extends FormRequest
      */
     public function rules(): array
     {
+        if ($this->input('data.attributes.url') !== null) {
+            return [
+                'data.attributes.url' => 'required|string|url',
+            ];
+        }
+
         return [
             'file' => 'required|file',
+            'type' => 'required|string|in:audio,video,avatar,document',
         ];
     }
 }

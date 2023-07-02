@@ -23,7 +23,8 @@
       "@content/*": ["./app/_content/*"],
       "@interface/*": ["./app/_interface/*"],
       "@scss/*": ["./app/scss/*"],
-      "@components/*": ["./app/_components/*"]
+      "@components/*": ["./app/_components/*"],
+      "@app/*": ["./app/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

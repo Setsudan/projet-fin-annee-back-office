@@ -22,9 +22,22 @@ class UploadFileController extends Controller
 
     public function store(StoreFileRequest $request)
     {
-        $request = $request->validated();
+        $validated = $request->validated();
 
-        $uploadedFile = $request['file'];
+        if (isset($validated['data']['attributes']['url'])) {
+            $file = new File();
+
+            $file->fill([
+                'url' => $validated['data']['attributes']['url'],
+                'type' => 'url',
+            ]);
+
+            $file->save();
+
+            return new FileResource($file);
+        }
+
+        $uploadedFile = $validated['file'];
 
         if ($uploadedFile->getError() >= 1) {
             return response()->json([
@@ -36,25 +49,31 @@ class UploadFileController extends Controller
             ], 422);
         }
 
-        $filename = Str::random(20).'.'.$uploadedFile->getClientOriginalExtension();
+        $filename = time().Str::random(10).'.'.$uploadedFile->getClientOriginalExtension();
 
         $file = new File();
 
-        DB::transaction(function () use ($file, $uploadedFile, $filename) {
+        DB::transaction(function () use ($file, $uploadedFile, $filename, $validated) {
             $file->fill([
                 'mime_type' => $uploadedFile->getMimeType(),
                 'name' => $filename,
                 'original_name' => $uploadedFile->getClientOriginalName(),
                 'size' => $uploadedFile->getSize(),
-                'type' => $uploadedFile->getClientOriginalExtension(),
+                'type' => $validated['type'],
             ]);
 
-            $file->save();
+            if ($validated['type'] === 'avatar') {
+                $uploadedFile->move('avatars/', $filename);
 
-            Storage::disk('local')->put(
-                'public/files/'.$filename,
-                $uploadedFile->get()
-            );
+                $file->url = '/avatars/'.$filename;
+            } else {
+                Storage::disk('local')->put(
+                    'public/files/'.$filename,
+                    $uploadedFile->get()
+                );
+            }
+
+            $file->save();
         });
 
         return new FileResource($file);
