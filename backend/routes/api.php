@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\OrchestreController;
 use App\Http\Controllers\ProductionItemController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UploadFileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserRelationshipController;
@@ -71,6 +73,18 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('/orchestres', OrchestreController::class)
         ->only(['store']);
+
+    /**
+     * Tickets
+     **/
+    Route::ApiResource('/tickets', TicketController::class)
+        ->only(['index', 'store', 'show', 'update', 'destroy']);
+
+    /**
+     * Comments
+     **/
+    Route::ApiResource('/comments', CommentController::class)
+        ->only(['index', 'store', 'show', 'update', 'destroy']);
 
     //Route::post('/orchestres/{orchestre}/invite', [OrchestreController::class, 'inviteByEmail']);
 
