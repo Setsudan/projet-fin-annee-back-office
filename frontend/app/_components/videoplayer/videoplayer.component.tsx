@@ -28,7 +28,6 @@ export default function VideoPlayer({
 
   const togglePlay = () => {
     setIsPlaying((prevIsPlaying) => !prevIsPlaying);
-    console.log(duration, progress);
   };
 
   const handleTimeUpdate = (
@@ -42,7 +41,6 @@ export default function VideoPlayer({
     if (videoRef.current) {
       setDuration(videoRef.current.duration);
     }
-    console.log(videoRef);
   };
 
   useEffect(() => {

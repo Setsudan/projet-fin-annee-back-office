@@ -10,12 +10,14 @@ export default function Chip({
   type,
   isSelected,
   setIsSelected,
+  onClicked,
 }: {
   text: string;
   icon?: ReactComponentElement<any>;
   type?: "primary" | "secondary" | "alert" | "success" | "warning" | "info";
   isSelected: boolean;
   setIsSelected: React.Dispatch<React.SetStateAction<boolean>>;
+  onClicked?: () => void;
 }) {
   return (
     <button
@@ -26,6 +28,9 @@ export default function Chip({
       }
       onClick={() => {
         setIsSelected(!isSelected);
+        if (onClicked) {
+          onClicked();
+        }
       }}
     >
       {icon ? (

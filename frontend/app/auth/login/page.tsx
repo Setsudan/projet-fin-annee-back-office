@@ -1,16 +1,27 @@
+"use client";
 import Input from "@components/input/input.component";
 import Button from "@components/button/button.component";
 import Hero from "@components/hero/hero.component";
 
 import { loginFunc } from "@app/_utils/session";
 import { useState } from "react";
+import { redirect } from "next/navigation";
 export default function LoginPage() {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
-
-  const handleLogin = async () => {
-    const response = await loginFunc(mail, password);
-    console.log(response);
+  const handleLogin = () => {
+    console.log("Connecting to server...");
+    loginFunc(mail, password).then(
+      (res) => {
+        if (res?.token) {
+          console.log("Logged in!");
+          localStorage.setItem("token", res.token);
+        }
+      },
+      (err) => {
+        console.log("Error: " + err);
+      }
+    );
   };
 
   return (
@@ -31,7 +42,16 @@ export default function LoginPage() {
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button type="primary" text="Login" onClick={handleLogin} />
+        <Button
+          type="primary"
+          text="Login"
+          onClicked={() => {
+            handleLogin();
+            setTimeout(() => {
+              window?.location?.replace("/");
+            }, 2000);
+          }}
+        />
       </Hero>
     </>
   );

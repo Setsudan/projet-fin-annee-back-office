@@ -7,13 +7,14 @@ export default function Button({
   text,
   leftIcon,
   rightIcon,
+  onClicked,
 }: {
   type: "primary" | "secondary" | "alert" | "success" | "warning" | "info";
   isTransparent?: boolean;
   text?: string;
   leftIcon?: ReactComponentElement<any> | string;
   rightIcon?: ReactComponentElement<any> | string;
-  onClick?: () => void;
+  onClicked?: () => void;
 }) {
   return (
     <button
@@ -22,6 +23,10 @@ export default function Button({
       }
       ${leftIcon || rightIcon ? "with-icon" : ""}
       `}
+      onClick={() => {
+        onClicked && onClicked();
+      }
+      }
     >
       {leftIcon ? (
         typeof leftIcon === "string" ? (

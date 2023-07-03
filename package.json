@@ -1,0 +1,11 @@
+{
+    "name": "projet-fin-annee-back-office",
+    "author": "Setsudan",
+    "version": "2.0.0",
+    "description": "Tentative perso du projet de fin d'année - Back Office",
+    "scripts": {
+        "start:front": "cd frontend && npm run dev",
+        "start:back": "cd backend && pocketbase serve",
+        "start": "concurrently \"npm run start:front\" \"npm run start:back\""
+    }
+}

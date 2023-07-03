@@ -1,21 +1,34 @@
 "use client";
 import content from "@content/landing.json";
-import { isSessionValidFunc } from "./_utils/session";
-import { useEffect } from "react";
-import { redirect } from 'next/navigation';
+import {
+  isSessionValidFunc,
+  getCurrentUserId,
+  getUserData,
+} from "./_utils/session";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   useEffect(() => {
-    if (!isSessionValidFunc()) {
-      redirect('/auth/login');
-    }
-    redirect('/dashboard')
+    console.log("Checking session...");
+    isSessionValidFunc().then((valid) => {
+      if (valid) {
+        getCurrentUserId().then((id) => {
+          getUserData(id as string).then((data) => {
+            if (data?.role !== "" && data?.role !== undefined) {
+              window?.location?.replace("/dashboard/" + data?.role);
+            } else {
+              window?.location?.replace("/auth/login");
+            }
+          });
+        });
+      }
+      return;
+    });
   }, []);
 
   return (
     <main>
-      <h1>{content.title}</h1>
+      <h1>Loading....</h1>{" "}
     </main>
   );
-
 }

@@ -8,13 +8,12 @@ export const loginFunc = async (username: string, password: string) => {
     .authWithPassword(username, password);
 
   if (authData) {
+    console.log(pb.authStore.model);
     return authData;
   }
 };
 
-export const logoutFunc = async () => {
-  pb.authStore.clear();
-};
+export const authStore = pb.authStore;
 
 export const isSessionValidFunc = async (): Promise<boolean> => {
   return pb.authStore.isValid;
@@ -66,3 +65,6 @@ export const getUserData = async (id: string) => {
   }
 };
 
+export const getCurrentUserRole = async () => {
+  return pb.authStore.model?.role;
+};

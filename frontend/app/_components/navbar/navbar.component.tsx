@@ -6,18 +6,20 @@ import UserChip from "@components/userChip/userChip.component";
 import ChipDropdown from "@components/chipDropdown/chipDropdown.component";
 import { useState } from "react";
 import { HiLogout } from "react-icons/hi";
+
+import { authStore } from "@app/_utils/session";
 export default function NavBar({
   userInfo,
 }: {
   userInfo: {
-    avatar: string,
-email: string,
-first_name: string,
-id: string,
-last_name: string,
-role: string,
-username: string,
-verified: boolean,
+    avatar: string;
+    email: string;
+    first_name: string;
+    id: string;
+    last_name: string;
+    role: string;
+    username: string;
+    verified: boolean;
   };
 }) {
   const dropDownContent = [
@@ -105,6 +107,10 @@ verified: boolean,
           setIsSelected={setIsSelectedHandler("logout")}
           isSelected={isSelected.logout}
           icon={<HiLogout />}
+          onClicked={() => {
+            authStore.clear();
+            window?.location?.reload();
+          }}
         />
       </div>
     </nav>
