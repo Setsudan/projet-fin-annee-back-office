@@ -9,7 +9,7 @@
   grid-template-columns: repeat(16, 1fr);
   grid-template-rows: repeat(8, 1fr);
   #nav {
-    width: 200px;
+    width: 300px;
     height: 100%;
     grid-column: 1 / 2;
     grid-row: 1 / 9;
@@ -18,7 +18,7 @@
     background: #fff;
     padding: 2.5rem;
     border-radius: 2rem;
-    grid-column: 3 / 17;
+    grid-column: 2 / 17;
     grid-row: 1 / 9;
     overflow: scroll;
   }

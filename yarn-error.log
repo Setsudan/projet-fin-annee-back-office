@@ -1,0 +1,50 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\setsu\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js init
+
+PATH: 
+  C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;D:\App\Go\bin;C:\Program Files\Docker\Docker\resources\bin;D:\App\Git\cmd;D:\App\Golang\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\GitHub CLI\;C:\Program Files\nodejs\;C:\Program Files\Go\bin;C:\Program Files\Git\cmd;C:\Users\setsu\AppData\Local\Microsoft\WindowsApps;C:\Users\setsu\go\bin;C:\Users\setsu\.deno\bin;C:\Users\setsu\AppData\Roaming\npm;C:\Users\setsu\go\bin;C:\Users\setsu\AppData\Local\Programs\Microsoft VS Code\bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  20.3.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (C:\Users\setsu\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:137150:13)
+      at Interface.emit (node:events:511:28)
+      at [_ttyWrite] [as _ttyWrite] (node:internal/readline/interface:1124:18)
+      at ReadStream.onkeypress (node:internal/readline/interface:263:20)
+      at ReadStream.emit (node:events:511:28)
+      at emitKeys (node:internal/readline/utils:357:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (node:internal/readline/emitKeypressEvents:64:36)
+      at ReadStream.emit (node:events:511:28)
+      at addChunk (node:internal/streams/readable:332:12)
+
+npm manifest: 
+  {
+      "name": "projet-fin-annee-back-office",
+      "author": "Setsudan",
+      "version": "2.0.0",
+      "description": "Tentative perso du projet de fin d'année - Back Office",
+      "scripts": {
+          "start:front": "cd frontend && npm run dev",
+          "start:back": "cd backend && pocketbase serve",
+          "start": "concurrently \"npm run start:front\" \"npm run start:back\"",
+          "init": "npm i && cd frontend && npm i && cd .. && npm run start"
+      },
+      "dependencies": {
+          "concurrently": "^8.2.0"
+      }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

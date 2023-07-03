@@ -1,3 +1,4 @@
 postgres
 .idea
 node_modules
+/backend/pb_data

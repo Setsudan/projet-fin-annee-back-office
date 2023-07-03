@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export default function Page({ params }: { params: { role: string } }) {
-  const possibleRoles = ["admin", "editor", "recorder", "translator"];
+  const possibleRoles = ["admin", "editor", "recorder", "translator", "teach"];
   if (possibleRoles.includes(params.role)) {
     return (
       <div>

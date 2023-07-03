@@ -1,10 +1,9 @@
 import Link from "next/link";
 import React, { ReactComponentElement } from "react";
 import "./chipDropdown.styles.scss";
-interface IdropdownContent {
-  link: string;
-  text: string;
-}
+import { white } from "@scss/variables";
+
+import { NavItem } from "@interface/nav.interface";
 
 export default function ChipDropdown({
   text,
@@ -16,7 +15,7 @@ export default function ChipDropdown({
 }: {
   text: string;
   icon?: ReactComponentElement<any>;
-  dropDownContent: IdropdownContent[];
+  dropDownContent: NavItem[];
   isSelected: boolean;
   setIsSelected: React.Dispatch<React.SetStateAction<boolean>>;
   type?: "primary" | "secondary" | "alert" | "success" | "warning" | "info";
@@ -30,7 +29,7 @@ export default function ChipDropdown({
         {icon ? (
           <div className="chipIcon">
             {React.cloneElement(icon, {
-              color: type ? type : "primary",
+              color: isSelected ? (type ? type : "primary") : white,
               size: 20,
             })}
           </div>
@@ -41,8 +40,8 @@ export default function ChipDropdown({
       {isSelected ? (
         <div className="chipDropdownContent">
           {dropDownContent.map((item, index) => (
-            <Link href={item.link} key={index}>
-              {item.text}
+            <Link href={item.link as string} key={index}>
+              {item.name}
             </Link>
           ))}
         </div>

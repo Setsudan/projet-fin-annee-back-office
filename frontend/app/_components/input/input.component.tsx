@@ -6,9 +6,18 @@ import "./input.styles.scss";
 import { HiSearch, HiUpload } from "react-icons/hi";
 import Button from "@components/button/button.component";
 export default function Input(props: {
-  type?: "text" | "password" | "tel" | "search" | "email" | "number" | "file";
+  type?:
+    | "text"
+    | "password"
+    | "tel"
+    | "search"
+    | "email"
+    | "number"
+    | "file"
+    | "select";
   name?: string;
   label?: string;
+  options?: string[];
   placeholder?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
@@ -44,6 +53,23 @@ export default function Input(props: {
                 <Badge icon={<HiOutlineEye />} type="transparent" />
               )}
             </button>
+          </div>
+        );
+
+      case "select":
+        return (
+          <div className="input">
+            <select className="select_dropdown">
+              {props.options?.map((option, index) => (
+                <option
+                  className="select_dropdown_item"
+                  key={index}
+                  value={option}
+                >
+                  {option}
+                </option>
+              ))}
+            </select>
           </div>
         );
 
