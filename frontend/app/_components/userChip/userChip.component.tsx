@@ -4,10 +4,14 @@ export default function UserChip({
   userInfo,
 }: {
   userInfo: {
-    name: string;
-    role: string;
-    email: string;
-    avatar: string;
+    avatar: string,
+email: string,
+first_name: string,
+id: string,
+last_name: string,
+role: string,
+username: string,
+verified: boolean,
   };
 }) {
   return (
@@ -21,7 +25,7 @@ export default function UserChip({
       />
       <div className="user-info">
         <abbr title={userInfo.email}>
-          <p className="user-name">{userInfo.name}</p>
+          <p className="user-name">{userInfo.first_name}</p>
           <p className="user-role">{userInfo.role}</p>
         </abbr>
       </div>

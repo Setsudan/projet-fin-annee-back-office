@@ -10,10 +10,14 @@ export default function NavBar({
   userInfo,
 }: {
   userInfo: {
-    name: string;
-    role: string;
-    email: string;
-    avatar: string;
+    avatar: string,
+email: string,
+first_name: string,
+id: string,
+last_name: string,
+role: string,
+username: string,
+verified: boolean,
   };
 }) {
   const dropDownContent = [

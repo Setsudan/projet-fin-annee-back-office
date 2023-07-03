@@ -13,6 +13,7 @@ export default function Button({
   text?: string;
   leftIcon?: ReactComponentElement<any> | string;
   rightIcon?: ReactComponentElement<any> | string;
+  onClick?: () => void;
 }) {
   return (
     <button

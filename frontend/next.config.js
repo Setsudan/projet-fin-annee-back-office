@@ -6,6 +6,7 @@ const nextConfig = {
       "res.cloudinary.com",
       "avatars.githubusercontent.com",
       "images.unsplash.com",
+      "127.0.0.1"
     ],
   },
 };
