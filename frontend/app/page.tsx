@@ -1,33 +1,34 @@
 "use client";
-import content from "@content/landing.json";
-import {
-  isSessionValidFunc,
-  getCurrentUserId,
-  getUserData,
-} from "./_utils/session";
-import { useEffect, useState } from "react";
+import { isSessionValidFunc } from "@utils/session";
+import { getCurrentUserId, getUserData } from "@utils/user";
+import { useEffect } from "react";
+import "@scss/pages/bridge.scss";
 
 export default function Home() {
   useEffect(() => {
-    isSessionValidFunc().then((valid) => {
-      if (valid) {
-        getCurrentUserId().then((id) => {
-          getUserData(id as string).then((data) => {
-            if (data?.role !== "" && data?.role !== undefined) {
-              window?.location?.replace("/dashboard/" + data?.role);
-            } else {
-              window?.location?.replace("/auth/login");
-            }
-          });
-        });
-      }
-      return;
-    });
+    checkRedirect();
   }, []);
 
+  const checkRedirect = async () => {
+    const valid = await isSessionValidFunc();
+    if (valid) {
+      const id = await getCurrentUserId();
+      const data = await getUserData(id as string);
+      if (data?.role !== "" && data?.role !== undefined) {
+        window?.location?.replace("/dashboard/" + data?.role);
+      } else {
+        window?.location?.replace("/auth/login");
+      }
+    }
+  };
+
   return (
-    <main>
-      <h1>Loading....</h1>{" "}
+    <main id="bridge">
+      <div className="loading">
+        {Array.from({ length: 12 }).map((_, index) => (
+          <div key={index} className="loading__circle"></div>
+        ))}
+      </div>
     </main>
   );
 }

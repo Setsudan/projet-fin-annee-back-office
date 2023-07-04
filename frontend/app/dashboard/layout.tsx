@@ -3,11 +3,7 @@ import NavBar from "@components/navbar/navbar.component";
 import "./layout.styles.scss";
 import { HiArrowLeft } from "react-icons/hi2";
 
-import {
-  getCurrentUserId,
-  isSessionValidFunc,
-  getUserData,
-} from "@app/_utils/session";
+import { getCurrentUserId, getUserData } from "@utils/user";
 
 import { userPfpUrl } from "@utils/pocket";
 

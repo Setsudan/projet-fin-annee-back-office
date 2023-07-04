@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import "./page.scss";
-import { getAllUsers, getUnverifiedUsers } from "@utils/admin.utils";
+import { getAllUsers, getUnverifiedUsers } from "@utils/admin";
 
 import UserCard from "@components/usercard/usercard.component";
 import { userPfpUrl } from "@utils/pocket";

@@ -49,19 +49,3 @@ export const registerFunc = async ({
     return record;
   }
 };
-
-export const getCurrentUserId = async () => {
-  return pb.authStore.model?.id;
-};
-
-export const getUserData = async (id: string) => {
-  const record = await pb.collection("users").getOne(id);
-
-  if (record) {
-    return record;
-  }
-};
-
-export const getCurrentUserRole = async () => {
-  return pb.authStore.model?.role;
-};
