@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   useEffect(() => {
-    console.log("Checking session...");
     isSessionValidFunc().then((valid) => {
       if (valid) {
         getCurrentUserId().then((id) => {

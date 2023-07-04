@@ -7,7 +7,7 @@
     "start:front": "cd frontend && npm run dev",
     "start:back": "cd backend && pocketbase serve",
     "start": "concurrently \"npm run start:front\" \"npm run start:back\"",
-    "initProject": "npm i && cd frontend && npm i && cd .. && npm run start"
+    "init:project": "npm i && cd frontend && npm i && cd .. && npm run start"
   },
   "dependencies": {
     "concurrently": "^8.2.0"

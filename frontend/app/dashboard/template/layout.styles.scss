@@ -27,7 +27,6 @@
     display: grid;
     grid-template-columns: repeat(12, 6fr);
     gap: 1rem;
-    outline: 1px solid red;
 
     section {
       background: $grey;

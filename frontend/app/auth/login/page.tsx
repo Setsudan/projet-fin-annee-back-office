@@ -10,11 +10,9 @@ export default function LoginPage() {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
   const handleLogin = () => {
-    console.log("Connecting to server...");
     loginFunc(mail, password).then(
       (res) => {
         if (res?.token) {
-          console.log("Logged in!");
           localStorage.setItem("token", res.token);
         }
       },

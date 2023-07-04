@@ -1,12 +1,16 @@
 "use client";
 import NavBar from "@components/navbar/navbar.component";
 import "./layout.styles.scss";
+import { HiArrowLeft } from "react-icons/hi2";
 
 import {
   getCurrentUserId,
   isSessionValidFunc,
   getUserData,
 } from "@app/_utils/session";
+
+import { userPfpUrl } from "@utils/pocket";
+
 import { useEffect, useState } from "react";
 import { redirect } from "next/navigation";
 import { NavItem } from "@interface/nav.interface";
@@ -113,6 +117,7 @@ export default function Layout(props: { children: React.ReactNode }) {
   const [isSessionValid, setIsSessionValid] = useState(true);
   const [userRole, setUserRole] = useState("");
   const [userNavitems, setUserNavitems] = useState<NavItem[] | undefined>([]);
+  const [isExpanded, setIsExpanded] = useState(true);
 
   useEffect(() => {
     getCurrentUserId().then((id) => {
@@ -121,11 +126,7 @@ export default function Layout(props: { children: React.ReactNode }) {
       }
       getUserData(id as string).then((data) => {
         setUserData({
-          avatar:
-            "http://127.0.0.1:8090/api/files/_pb_users_auth_/" +
-            id +
-            "/" +
-            data?.avatar,
+          avatar: userPfpUrl + id + "/" + data?.avatar,
           email: data?.email,
           first_name: data?.first_name,
           id: id as string,
@@ -148,17 +149,28 @@ export default function Layout(props: { children: React.ReactNode }) {
   useEffect(() => {
     if (userRole) {
       /* @ts-ignore */
-      console.log(navData[userRole]);
-      /* @ts-ignore */
       setUserNavitems(navData[userRole]);
-      console.log(userNavitems);
     }
   }, [userRole, userNavitems]);
 
+  const toggleNavbarWidth = () => {
+    setIsExpanded((prevState) => !prevState);
+  };
+
   return (
     <main id="dashboard-layout">
-      <div id="nav">
-        <NavBar userInfo={userData} navItems={userNavitems as NavItem[]} />
+      <div
+        id="nav"
+        className={`navbar ${isExpanded ? "expanded" : "collapsed"}`}
+      >
+        <NavBar
+          isExpanded={isExpanded}
+          userInfo={userData}
+          navItems={userNavitems as NavItem[]}
+        />
+        <button className="toggle-nav-btn" onClick={toggleNavbarWidth}>
+          <HiArrowLeft />
+        </button>
       </div>
       <div id="content">{props.children}</div>
     </main>

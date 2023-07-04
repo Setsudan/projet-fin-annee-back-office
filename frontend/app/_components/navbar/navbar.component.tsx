@@ -3,15 +3,15 @@ import Chip from "@components/chip/chip.components";
 import "./navbar.styles.scss";
 import UserChip from "@components/userChip/userChip.component";
 import ChipDropdown from "@components/chipDropdown/chipDropdown.component";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { HiLogout } from "react-icons/hi";
 import { NavItem } from "@interface/nav.interface";
 import { authStore } from "@app/_utils/session";
-import { redirect } from "next/navigation";
 
 export default function NavBar({
   userInfo,
   navItems,
+  isExpanded,
 }: {
   userInfo: {
     avatar: string;
@@ -24,6 +24,7 @@ export default function NavBar({
     verified: boolean;
   };
   navItems: NavItem[];
+  isExpanded: boolean;
 }) {
   const [isSelected, setIsSelected] = useState({
     dashboard: false,
@@ -53,25 +54,22 @@ export default function NavBar({
     };
   };
 
-  useEffect(() => {
-    console.log("navItems", navItems);
-  });
-
   return (
     <nav>
-      <UserChip userInfo={userInfo} />
+      <UserChip userInfo={userInfo} showText={isExpanded} />
       <div className="nav-content">
         {navItems.map((item) => {
           if (item.type === "link") {
             return (
               <Chip
                 key={item.name}
-                text={item.name}
+                text={isExpanded ? item.name : ""}
                 icon={item.icon}
                 setIsSelected={setIsSelectedHandler(item.name)}
                 isSelected={isSelected[item.name as keyof typeof isSelected]}
                 onClicked={() => {
-                  redirect(item.link as string);
+                  console.log(item.link);
+                  window?.location?.assign(item.link as string);
                 }}
               />
             );
@@ -80,7 +78,7 @@ export default function NavBar({
               <ChipDropdown
                 key={item.name}
                 dropDownContent={item.items as NavItem[]}
-                text={item.name}
+                text={isExpanded ? item.name : ""}
                 icon={item.icon}
                 setIsSelected={setIsSelectedHandler(item.name)}
                 isSelected={isSelected[item.name as keyof typeof isSelected]}
@@ -93,7 +91,7 @@ export default function NavBar({
       <div className="bottom-btn">
         <Chip
           type="warning"
-          text="Logout"
+          text={isExpanded ? "Logout" : ""}
           setIsSelected={setIsSelectedHandler("logout")}
           isSelected={isSelected.logout}
           icon={<HiLogout />}

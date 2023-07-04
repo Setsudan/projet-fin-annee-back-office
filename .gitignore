@@ -1,4 +1,4 @@
 postgres
 .idea
 node_modules
-/backend/pb_data
+backend/pb_data/logs.db

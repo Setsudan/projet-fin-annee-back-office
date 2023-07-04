@@ -1,13 +1,18 @@
 import Image from "next/image";
 import "./usercard.styles.scss";
+import { ReactComponentElement } from "react";
 export default function UserCard({
   profilePicture,
   name,
   role,
+  email,
+  action,
 }: {
   profilePicture: string;
   name: string;
   role: string;
+  email: string;
+  action?: ReactComponentElement<any>;
 }) {
   return (
     <div className="user-card">
@@ -23,7 +28,10 @@ export default function UserCard({
         className="user-card__profile-picture"
       />
       <div className="user-card__name">{name}</div>
+      <div className="user-card__email">{email}</div>
       <div className="user-card__role">{role}</div>
+
+      {action ? <div className="user-card__action">{action}</div> : null}
     </div>
   );
 }

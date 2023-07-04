@@ -25,8 +25,7 @@ export default function Button({
       `}
       onClick={() => {
         onClicked && onClicked();
-      }
-      }
+      }}
     >
       {leftIcon ? (
         typeof leftIcon === "string" ? (
@@ -35,7 +34,7 @@ export default function Button({
           leftIcon
         )
       ) : null}
-      {text ? text : "Button"}
+      {text ? text : ""}
       {rightIcon ? (
         typeof rightIcon === "string" ? (
           <Image src={rightIcon} width={16} height={16} alt="icon" />

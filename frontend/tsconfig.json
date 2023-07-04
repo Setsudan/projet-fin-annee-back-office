@@ -24,6 +24,7 @@
       "@interface/*": ["./app/_interface/*"],
       "@scss/*": ["./app/scss/*"],
       "@components/*": ["./app/_components/*"],
+      "@utils/*": ["./app/_utils/*"],
       "@app/*": ["./app/*"]
     }
   },

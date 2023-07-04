@@ -8,11 +8,14 @@ Projet de fin d'année NextJS 13 | TypeScript | Pocketbase
 
 ## ⚙️ SETUP
 
-Une fois le projet cloner lancer 
+Une fois le projet cloner lancer
+
 ```
-npm run init
+npm run init:project
 ```
+
 ou
+
 ```
-yarn init
+yarn init:project
 ```

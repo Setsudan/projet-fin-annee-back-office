@@ -1,6 +1,4 @@
-import PocketBase from "pocketbase";
-
-const pb = new PocketBase("http://127.0.0.1:8090");
+import { pb } from "./pocket";
 
 export const loginFunc = async (username: string, password: string) => {
   const authData = await pb
@@ -8,7 +6,6 @@ export const loginFunc = async (username: string, password: string) => {
     .authWithPassword(username, password);
 
   if (authData) {
-    console.log(pb.authStore.model);
     return authData;
   }
 };

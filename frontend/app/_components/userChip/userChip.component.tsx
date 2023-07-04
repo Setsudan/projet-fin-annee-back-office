@@ -2,6 +2,7 @@ import Image from "next/image";
 import "./userChip.styles.scss";
 export default function UserChip({
   userInfo,
+  showText,
 }: {
   userInfo: {
     avatar: string;
@@ -13,6 +14,7 @@ export default function UserChip({
     username: string;
     verified: boolean;
   };
+  showText?: boolean;
 }) {
   return (
     <div className="user-chip">
@@ -23,12 +25,14 @@ export default function UserChip({
         height={500}
         className="user-chip__profile-picture"
       />
-      <div className="user-info">
-        <abbr title={userInfo.email}>
-          <p className="user-name">{`${userInfo.first_name} ${userInfo.last_name}`}</p>
-          <p className="user-role">{userInfo.role}</p>
-        </abbr>
-      </div>
+      {showText && (
+        <div className="user-info">
+          <abbr title={userInfo.email}>
+            <p className="user-name">{`${userInfo.first_name} ${userInfo.last_name}`}</p>
+            <p className="user-role">{userInfo.role}</p>
+          </abbr>
+        </div>
+      )}
     </div>
   );
 }
