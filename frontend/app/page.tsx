@@ -1,21 +1,24 @@
-"use client";
-import content from "@content/landing.json";
-import { isSessionValidFunc } from "./_utils/session";
-import { useEffect } from "react";
-import { redirect } from 'next/navigation';
-
+'use client';
+import '@scss/pages/bridge.scss';
+import { isSessionValidFunc } from '@utils/session';
+import { getCurrentUserRole } from '@utils/user';
+import {useEffect} from 'react';
 export default function Home() {
-  useEffect(() => {
-    if (!isSessionValidFunc()) {
-      redirect('/auth/login');
-    }
-    redirect('/dashboard')
-  }, []);
+	useEffect(() => {
+		autoRedirect();
+	}, []);
 
-  return (
-    <main>
-      <h1>{content.title}</h1>
-    </main>
-  );
+	const autoRedirect = async () => {
+		const isSessionValid = await isSessionValidFunc();
+		if (isSessionValid) {
+			window?.location?.assign(`/dashboard/${getCurrentUserRole()}`);
+		} else {
+			window?.location?.assign('/auth/login');
+		}
+	};
 
+	return (<></>);
+	
 }
+
+	

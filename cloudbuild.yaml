@@ -1,0 +1,13 @@
+# This file will specify the steps that Cloud Build will take to build and deploy your Docker image.
+# The steps are:
+# 1. Docker compose
+# 2. Push to Google Container Registry
+# 3. Deploy to Google App Engine
+
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['compose', 'up', '-d']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/$REPO_NAME']
+images:
+- 'gcr.io/$PROJECT_ID/$REPO_NAME'

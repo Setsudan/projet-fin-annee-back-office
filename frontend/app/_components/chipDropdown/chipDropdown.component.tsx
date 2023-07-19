@@ -1,52 +1,51 @@
-import Link from "next/link";
-import React, { ReactComponentElement } from "react";
-import "./chipDropdown.styles.scss";
-interface IdropdownContent {
-  link: string;
-  text: string;
-}
+import Link from 'next/link';
+import './chipDropdown.styles.scss';
+import React from 'react';
+import { white } from '@scss/variables';
+
+import { NavItem } from '@interface/nav.interface';
 
 export default function ChipDropdown({
-  text,
-  icon,
-  dropDownContent,
-  setIsSelected,
-  isSelected,
-  type,
+	text,
+	icon,
+	dropDownContent,
+	setIsSelected,
+	isSelected,
+	type,
 }: {
   text: string;
-  icon?: ReactComponentElement<any>;
-  dropDownContent: IdropdownContent[];
+  icon?: React.JSX.Element;
+  dropDownContent: NavItem[];
   isSelected: boolean;
   setIsSelected: React.Dispatch<React.SetStateAction<boolean>>;
-  type?: "primary" | "secondary" | "alert" | "success" | "warning" | "info";
+  type?: 'primary' | 'secondary' | 'alert' | 'success' | 'warning' | 'info';
 }) {
-  return (
-    <div className="chipDropdown">
-      <button
-        className={`chipButton ` + `${type ? type + "-" : "primary-"}chip`}
-        onClick={() => setIsSelected(!isSelected)}
-      >
-        {icon ? (
-          <div className="chipIcon">
-            {React.cloneElement(icon, {
-              color: type ? type : "primary",
-              size: 20,
-            })}
-          </div>
-        ) : null}
+	return (
+		<div className="chipDropdown">
+			<button
+				className={'chipButton ' + `${type ? type + '-' : 'primary-'}chip`}
+				onClick={() => setIsSelected(!isSelected)}
+			>
+				{icon ? (
+					<div className="chipIcon">
+						{React.cloneElement(icon, {
+							color: isSelected ? (type ? type : 'primary') : white,
+							size: 20,
+						})}
+					</div>
+				) : null}
 
-        <p className="chipText">{text}</p>
-      </button>
-      {isSelected ? (
-        <div className="chipDropdownContent">
-          {dropDownContent.map((item, index) => (
-            <Link href={item.link} key={index}>
-              {item.text}
-            </Link>
-          ))}
-        </div>
-      ) : null}
-    </div>
-  );
+				<p className="chipText">{text}</p>
+			</button>
+			{isSelected ? (
+				<div className="chipDropdownContent">
+					{dropDownContent.map((item, index) => (
+						<Link href={item.link as string} key={index}>
+							{item.name}
+						</Link>
+					))}
+				</div>
+			) : null}
+		</div>
+	);
 }

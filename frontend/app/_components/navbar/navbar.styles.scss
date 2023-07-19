@@ -2,8 +2,14 @@
 nav {
   display: flex;
   flex-direction: column;
-  width: 100%;
   height: 100%;
+  position: relative;
+  &.expanded {
+    width: 100%;
+  }
+  &.collapsed {
+    width: 7rem;
+  }
   .nav-content {
     display: flex;
     flex-direction: column;
@@ -13,5 +19,20 @@ nav {
   }
   .bottom-btn {
     margin-top: auto;
+  }
+  .toggle-nav-btn {
+    position: absolute;
+    top: calc(50% - 2rem);
+    right: 0;
+    z-index: 100;
+    width: 2rem;
+    height: 4rem;
+    background: $white;
+    border-radius: 8px 0 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
   }
 }

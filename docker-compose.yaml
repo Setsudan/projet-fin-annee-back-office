@@ -1,70 +1,27 @@
 version: "3.8"
 
 services:
-#  web:
-#    build:
-#      context: ./frontend
-#      target: runner
-#    container_name: nextjs
-#    volumes:
-#      - ./frontend:/app
-#    ports:
-#      - "3000:3000"
-#    environment:
-#      NODE_ENV: development
-#    restart: unless-stopped
-
-  php:
+  web:
     build:
-      context: ./backend
-      dockerfile: Dockerfile
-    container_name: php
-    restart: unless-stopped
-    working_dir: /var/www/
-    user: 1000:1000
+      context: ./frontend
+      target: runner
+    container_name: nextjs
     volumes:
-      - ./backend:/var/www
-      - ./backend/php.ini:/usr/local/etc/php/php.ini
-    networks:
-      - bridge
-
-  postgres:
-    image: postgres:latest
-    container_name: postgres
-    restart: unless-stopped
+      - ./frontend:/app
+    ports:
+      - "3000:3000"
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
-      POSTGRES_DB: laravel
-    ports:
-      - 5432:5432
-    volumes:
-      - ./postgres:/var/lib/postgresql/data
-    networks:
-      - bridge
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
-    networks:
-      - bridge
-
-  nginx:
-    image: nginx:latest
-    container_name: nginx
+      NODE_ENV: development
+    restart: unless-stopped
+    depends_on:
+      - pocketbase
+  pocketbase:
+    image: augustodelg/pocketbase:latest
     restart: unless-stopped
     ports:
-      - 8000:80
+      - 8090:8090
     volumes:
-      - ./backend:/var/www
-      - ./backend/nginx/conf.d:/etc/nginx/conf.d
-    networks:
-      - bridge
-    depends_on:
-      - php
-
-networks:
-  bridge:
-    driver: bridge
+      - pocketbase-data:/pb_data
+      - pocketbase-data:/pb_migrations
+volumes:
+  pocketbase-data:

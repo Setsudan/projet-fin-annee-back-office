@@ -1,0 +1,16 @@
+{
+  "name": "projet-fin-annee-back-office",
+  "author": "Setsudan",
+  "version": "2.0.0",
+  "description": "Tentative perso du projet de fin d'année - Back Office",
+  "scripts": {
+    "start:front": "cd frontend && yarn dev",
+    "start:back": "cd backend && pocketbase serve",
+    "start": "concurrently \"yarn start:front\" \"yarn start:back\"",
+    "project:start": "npm i && cd frontend && npm i && cd .. && yarn start",
+    "lint": "cd frontend && yarn lint"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
